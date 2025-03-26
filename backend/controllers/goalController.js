@@ -63,4 +63,3 @@ module.exports = {
     getGoals, postGoals, putGoal, deleteGoal
 }
 
-//ok
