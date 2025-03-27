@@ -125,7 +125,7 @@ function Register() {
             </button>
           </div>
           <div className='register-link'>
-            ¿Tienes una cuenta?, incia sesion <a href='/register'>aquí</a>
+            ¿Tienes una cuenta?, incia sesion <a href='/login'>aquí</a>
           </div>
         </form>
       </section>
