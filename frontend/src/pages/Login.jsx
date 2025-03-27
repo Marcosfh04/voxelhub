@@ -64,7 +64,6 @@ function Login() {
         <h1>
           <FaSignInAlt /> Login
         </h1>
-        <p>Logueate</p>
       </section>
 
       <section className='form'>
