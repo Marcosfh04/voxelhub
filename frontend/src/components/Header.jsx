@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
+import '../css/Header.css'
+
 
 function Header() {
   const navigate = useNavigate()
@@ -18,7 +20,7 @@ function Header() {
   return (
     <header className='header'>
       <div className='logo'>
-        <Link to='/'>GoalSetter</Link>
+        <Link to='/'>VoxelHub</Link>
       </div>
       <ul>
         {user ? (

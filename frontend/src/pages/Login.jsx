@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { login, reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
+import '../css/Login.css'
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -92,10 +93,14 @@ function Login() {
           </div>
 
           <div className='form-group'>
-            <button type='submit' className='btn btn-block'>
+            <button type='submit' className='btn-btn-block'>
               Submit
             </button>
           </div>
+          <div className='register-link'>
+            ¿No tienes cuenta?, puedes registrarte <a href='/register'>aquí</a>
+          </div>
+
         </form>
       </section>
     </>
