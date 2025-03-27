@@ -6,11 +6,13 @@
   "scripts": {
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
-    "client": "cd frontend && npm start"
+    "client": "cd frontend && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Grupo 5 Viernes 11-13",
   "license": "MIT",
   "dependencies": {
+    "axios": "^1.8.4",
     "bcryptjs": "^3.0.2",
     "colors": "^1.4.0",
     "dotenv": "^16.4.7",
@@ -18,9 +20,11 @@
     "express-async-handler": "^1.2.0",
     "git": "^0.1.5",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.13.0"
+    "mongoose": "^8.13.0",
+    "react-toastify": "^11.0.5"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "nodemon": "^3.1.9"
   }
 }
