@@ -6,6 +6,8 @@ import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import AssetDetail from './pages/AssetDetail'
+import AssetForm from './components/AssetForm'
+import '../src/css/Header.css'
 
 function AppWrapper() {
   const location = useLocation()
@@ -19,6 +21,8 @@ function AppWrapper() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/assets/:id" element={<AssetDetail />} />
+        <Route path='/subir' element={<AssetForm />} />
+
       </Routes>
     </div>
   )

@@ -47,16 +47,21 @@ function AssetDetail() {
 
   if (loading) return <Spinner />
   if (!asset) return <p>No se ha encontrado el asset.</p>
+  const extraerIdGoogle = (url) => {
+    const match = url.match(/id=([a-zA-Z0-9_-]+)/)
+    return match ? match[1] : ''
+  }
+
 
   return (
     <div className="asset-detail">
       <h1>{asset.title}</h1>
-      <img src={asset.previewImage} alt={asset.title} />
+      <img src={`https://lh3.googleusercontent.com/d/${extraerIdGoogle(asset.previewImage)}=s512`} alt={asset.title} />
       <p><strong>Descripción:</strong> {asset.description}</p>
       <p><strong>Tipo:</strong> {asset.type}</p>
       <p><strong>Autor:</strong> {asset.user?.name}</p>
       <p><strong>Asset URL:</strong> <a href={asset.assetURL}>{asset.assetURL}</a></p>
-
+      
       <h3>Comentarios</h3>
       {asset.comments?.map((comentario, index) => (
         <div key={index}>

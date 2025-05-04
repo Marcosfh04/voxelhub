@@ -29,6 +29,8 @@ const createAsset = asyncHandler(async (req, res) => {
     assetUrl,
   })
 
+  console.log('✅ req.user:', req.user)
+
   res.status(201).json(asset)
 })
 

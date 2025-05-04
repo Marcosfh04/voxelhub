@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createAsset } from '../features/assets/assetSlice'
 import { toast } from 'react-toastify'
+import axios from 'axios' 
 
 function AssetForm() {
   const [form, setForm] = useState({
@@ -12,11 +13,32 @@ function AssetForm() {
     assetUrl: '',
   })
 
+  const [subiendoAsset, setSubiendoAsset] = useState(false)
+  const [subiendoImagen, setSubiendoImagen] = useState(false)
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
+  const subirArchivoADrive = async (file, campo) => {
+    const formData = new FormData()
+    formData.append('file', file)
+
+    try {
+      if (campo === 'assetUrl') setSubiendoAsset(true)
+      if (campo === 'previewImage') setSubiendoImagen(true)
+
+      const res = await axios.post('/api/drive/upload', formData)
+      setForm((prev) => ({ ...prev, [campo]: res.data.url }))
+      toast.success(`${campo === 'assetUrl' ? 'Asset' : 'Imagen'} subida correctamente`)
+    } catch (err) {
+      toast.error(`Error al subir ${campo === 'assetUrl' ? 'el asset' : 'la imagen'}`)
+    } finally {
+      setSubiendoAsset(false)
+      setSubiendoImagen(false)
+    }
   }
 
   const handleSubmit = (e) => {
@@ -38,7 +60,7 @@ function AssetForm() {
           assetUrl: '',
         })
       })
-      .catch(() => toast.error('Error al subir el asset'))
+      .catch(() => toast.error('Error al guardar el asset'))
   }
 
   if (!user) {
@@ -51,10 +73,10 @@ function AssetForm() {
         <h2>Subir nuevo Asset</h2>
 
         <label>Título</label>
-        <input type='text' name='title' value={form.title} onChange={handleChange} required placeholder='Ej: Modelo 3D de espada' />
+        <input type='text' name='title' value={form.title} onChange={handleChange} required />
 
         <label>Descripción</label>
-        <textarea name='description' value={form.description} onChange={handleChange} required placeholder='Breve descripción del asset' />
+        <textarea name='description' value={form.description} onChange={handleChange} required />
 
         <label>Tipo</label>
         <select name='type' value={form.type} onChange={handleChange}>
@@ -66,13 +88,24 @@ function AssetForm() {
           <option value='other'>Otro</option>
         </select>
 
-        <label>Imagen descriptiva (URL pública de Google Drive o FTP)</label>
-        <input type='url' name='previewImage' value={form.previewImage} onChange={handleChange} required placeholder='https://drive.google.com/...' />
+        <label>Imagen descriptiva (se subirá a Drive)</label>
+        <input type='file' accept='image/*' onChange={(e) => subirArchivoADrive(e.target.files[0], 'previewImage')} />
+        {subiendoImagen && <p>Subiendo imagen...</p>}
+        {form.previewImage && <img src={form.previewImage} alt='preview' width='150' />}
 
-        <label>URL del asset (Google Drive, Dropbox, FTP...)</label>
-        <input type='url' name='assetUrl' value={form.assetUrl} onChange={handleChange} required placeholder='https://...' />
+        <label>Archivo del asset</label>
+        <input type='file' onChange={(e) => subirArchivoADrive(e.target.files[0], 'assetUrl')} />
+        {subiendoAsset && <p>Subiendo asset...</p>}
+        {form.assetUrl && (
+          <p>
+            <strong>Asset subido:</strong>{' '}
+            <a href={form.assetUrl} target='_blank' rel='noreferrer'>
+              Ver archivo
+            </a>
+          </p>
+        )}
 
-        <button type='submit' className='btn btn-block'>Subir Asset</button>
+        <button type='submit' className='btn btn-block'>Guardar Asset</button>
       </form>
     </section>
   )

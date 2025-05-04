@@ -1,0 +1,28 @@
+.asset-card {
+    background-color: #111;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px;
+    max-width: 250px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .asset-card:hover {
+    transform: scale(1.03);
+  }
+  
+  .asset-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  
+  .asset-info {
+    margin-top: 10px;
+    text-align: center;
+  }
+  

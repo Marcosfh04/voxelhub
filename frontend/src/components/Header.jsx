@@ -1,10 +1,8 @@
-import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import { FaSignInAlt, FaSignOutAlt, FaUser, FaUpload } from 'react-icons/fa'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
 import '../css/Header.css'
-
 
 function Header() {
   const navigate = useNavigate()
@@ -17,12 +15,26 @@ function Header() {
     navigate('/')
   }
 
+  const handleUploadClick = () => {
+    if (user) {
+      navigate('/subir')
+    } else {
+      navigate('/login')
+    }
+  }
+
   return (
     <header className='header'>
       <div className='logo'>
         <Link to='/'>VoxelHub</Link>
       </div>
       <ul>
+        <li>
+          <button className='btn' onClick={handleUploadClick}>
+            <FaUpload /> Subir Asset
+          </button>
+        </li>
+
         {user ? (
           <li>
             <button className='btn' onClick={onLogout}>
