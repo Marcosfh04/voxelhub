@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createAsset } from '../features/assets/assetSlice'
 import { toast } from 'react-toastify'
-import axios from 'axios' 
+import axios from 'axios'
+import '../css/AssetForm.css'
 
 function AssetForm() {
   const [form, setForm] = useState({
@@ -22,7 +23,17 @@ function AssetForm() {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
+  const extraerIdGoogle = (url) => {
+    const match = url.match(/id=([a-zA-Z0-9_-]+)/)
+    return match ? match[1] : ''
+  }
+
   const subirArchivoADrive = async (file, campo) => {
+    if (campo === 'previewImage' && !file.type.startsWith('image/')) {
+      toast.error('El archivo seleccionado no es una imagen válida.')
+      return
+    }
+
     const formData = new FormData()
     formData.append('file', file)
 
@@ -68,44 +79,82 @@ function AssetForm() {
   }
 
   return (
-    <section className='form'>
+    <section className="asset-form-container">
       <form onSubmit={handleSubmit}>
         <h2>Subir nuevo Asset</h2>
 
         <label>Título</label>
-        <input type='text' name='title' value={form.title} onChange={handleChange} required />
+        <input
+          type="text"
+          name="title"
+          value={form.title}
+          onChange={handleChange}
+          required
+        />
 
         <label>Descripción</label>
-        <textarea name='description' value={form.description} onChange={handleChange} required />
+        <textarea
+          name="description"
+          value={form.description}
+          onChange={handleChange}
+          required
+        />
 
         <label>Tipo</label>
-        <select name='type' value={form.type} onChange={handleChange}>
-          <option value='2D'>2D</option>
-          <option value='3D'>3D</option>
-          <option value='audio'>Audio</option>
-          <option value='video'>Video</option>
-          <option value='code'>Código</option>
-          <option value='other'>Otro</option>
+        <select name="type" value={form.type} onChange={handleChange}>
+          <option value="2D">2D</option>
+          <option value="3D">3D</option>
+          <option value="audio">Audio</option>
+          <option value="video">Video</option>
+          <option value="code">Código</option>
+          <option value="other">Otro</option>
         </select>
 
-        <label>Imagen descriptiva (se subirá a Drive)</label>
-        <input type='file' accept='image/*' onChange={(e) => subirArchivoADrive(e.target.files[0], 'previewImage')} />
-        {subiendoImagen && <p>Subiendo imagen...</p>}
-        {form.previewImage && <img src={form.previewImage} alt='preview' width='150' />}
+        {/* NUEVO diseño de imagen descriptiva */}
+        <label>Imagen descriptiva</label>
+        <div
+          className="asset-upload-box"
+          onClick={() => document.getElementById('previewInput').click()}
+        >
+          {form.previewImage ? (
+            <img
+              src={`https://lh3.googleusercontent.com/d/${extraerIdGoogle(form.previewImage)}=s512`}
+              alt="preview"
+            />
+          ) : (
+            <>
+              <i className="fas fa-image fa-3x"></i>
+              <p>Selecciona una imagen</p>
+            </>
+          )}
+        </div>
 
+        <input
+          id="previewInput"
+          type="file"
+          accept="image/*"
+          onChange={(e) => subirArchivoADrive(e.target.files[0], 'previewImage')}
+          style={{ display: 'none' }}
+        />
+        {subiendoImagen && <p>Subiendo imagen...</p>}
+
+        {/* Archivo del asset */}
         <label>Archivo del asset</label>
-        <input type='file' onChange={(e) => subirArchivoADrive(e.target.files[0], 'assetUrl')} />
+        <input
+          type="file"
+          onChange={(e) => subirArchivoADrive(e.target.files[0], 'assetUrl')}
+        />
         {subiendoAsset && <p>Subiendo asset...</p>}
         {form.assetUrl && (
           <p>
             <strong>Asset subido:</strong>{' '}
-            <a href={form.assetUrl} target='_blank' rel='noreferrer'>
+            <a href={form.assetUrl} target="_blank" rel="noreferrer">
               Ver archivo
             </a>
           </p>
         )}
 
-        <button type='submit' className='btn btn-block'>Guardar Asset</button>
+        <button type="submit">Subir Asset</button>
       </form>
     </section>
   )
