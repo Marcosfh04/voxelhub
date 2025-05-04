@@ -8,6 +8,7 @@ import Register from './pages/Register'
 import AssetDetail from './pages/AssetDetail'
 import AssetForm from './components/AssetForm'
 import '../src/css/Header.css'
+import ScrollToTop from './components/ScrollToTop'
 
 function AppWrapper() {
   const location = useLocation()
@@ -16,6 +17,7 @@ function AppWrapper() {
   return (
     <div className={isDashboard ? 'container-full' : 'container'}>
       <Header />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
