@@ -207,6 +207,114 @@ h3 {
   animation: spin 1.2s linear infinite;
 }
 
+.assets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+
+
+.asset-card:hover {
+  transform: scale(1.02);
+}
+
+
+
+.asset-info h3 {
+  margin: 0.5rem 0 0.2rem;
+}
+
+.filters {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.filters .btn {
+  margin: 0.3rem;
+}
+
+.btn-activo {
+  background-color: orange;
+  color: black;
+}
+.dashboard {
+  padding: 1rem;
+  background: #000;
+  color: #fff;
+  text-align: left;
+}
+
+.categoria-bloque {
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.categoria-titulo {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.categoria-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  margin: 0;
+}
+
+.asset-card {
+  flex: 0 0 auto;
+  width: 180px;
+  border-radius: 10px;
+  background-color: #111;
+  border: 1px solid #333;
+  padding: 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.asset-card:hover {
+  transform: scale(1.05);
+}
+
+.asset-image {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.categoria-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 0 0 1rem 0; /* sin padding izquierdo */
+  justify-content: flex-start; /* alinear al inicio */
+  scroll-padding-left: 0;
+}
+
+.categoria-scroll::-webkit-scrollbar {
+  height: 10px;
+}
+
+.categoria-scroll::-webkit-scrollbar-track {
+  background: #222;
+  border-radius: 10px;
+}
+
+.categoria-scroll::-webkit-scrollbar-thumb {
+  background: orange;
+  border-radius: 10px;
+}
+
+.categoria-scroll::-webkit-scrollbar-thumb:hover {
+  background: #ffb300;
+}
+
+
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -229,3 +337,4 @@ h3 {
     font-size: 1.5rem;
   }
 }
+
