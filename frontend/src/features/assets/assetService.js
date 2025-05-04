@@ -31,11 +31,32 @@ const deleteAsset = async (assetId, token) => {
   const response = await axios.delete(API_URL + assetId, config)
   return response.data
 }
+const getAssetById = async (id) => {
+  const response = await fetch(`/api/assets/${id}`)
+  if (!response.ok) throw new Error('No se pudo obtener el asset')
+  return await response.json()
+}
+
+const comentarAsset = async (id, comentario, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  }
+
+  const response = await axios.post(`/api/assets/${id}/comment`, comentario, config)
+  return response.data
+}
 
 const assetService = {
-  createAsset,
   getAssets,
+  createAsset,
   deleteAsset,
+  getAssetById,
+  comentarAsset, 
+
 }
+
 
 export default assetService

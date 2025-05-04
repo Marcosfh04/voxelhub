@@ -1,9 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function AssetItem({ asset }) {
+  const navigate = useNavigate()
+
   const handleClick = () => {
-    // Redirigirá a detalle /assets/:id (a implementar después)
-    console.log('Ver asset:', asset.title)
+    navigate(`/assets/${asset._id}`)
   }
 
   return (

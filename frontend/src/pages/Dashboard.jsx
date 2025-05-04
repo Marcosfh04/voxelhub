@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAssets, reset } from '../features/assets/assetSlice'
 import AssetItem from '../components/AssetItem'
 import Spinner from '../components/Spinner'
+import '../dashboard.css'
 
 function Dashboard() {
   const dispatch = useDispatch()

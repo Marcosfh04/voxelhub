@@ -76,9 +76,50 @@ const updateAsset = asyncHandler(async (req, res) => {
   res.status(200).json(updated)
 })
 
+// @desc    Get one asset
+// @route   GET /api/assets/:id
+// @access  Public
+const getAssetById = asyncHandler(async (req, res) => {
+  const asset = await Asset.findById(req.params.id)
+    .populate('user', 'name') // autor
+    .populate('comments.user', 'name')
+
+  if (!asset) {
+    res.status(404)
+    throw new Error('Asset no encontrado')
+  }
+
+  res.json(asset)
+})
+
+
+const comentarAsset = asyncHandler(async (req, res) => {
+  const { text } = req.body
+  const asset = await Asset.findById(req.params.id)
+
+  if (!asset) {
+    res.status(404)
+    throw new Error('Asset not found')
+  }
+
+  const nuevoComentario = {
+    user: req.user._id,
+    text,
+  }
+
+  asset.comments.push(nuevoComentario)
+  await asset.save()
+
+  res.status(201).json(asset.comments)
+})
+
+
+
 module.exports = {
   getAssets,
   createAsset,
   deleteAsset,
   updateAsset,
+  getAssetById,
+  comentarAsset,
 }
