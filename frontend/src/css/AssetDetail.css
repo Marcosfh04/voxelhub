@@ -150,13 +150,13 @@
   position: relative;
 }
 
-/* Estilo para las imágenes del carrusel */
 .carousel-image {
   width: 100%;
-  height: 200px; /* Altura fija para las imágenes */
-  object-fit: cover; /* Ajustar la imagen sin deformarla */
+  height: 400px; /* Altura fija para el contenedor */
+  object-fit: contain; /* Ajustar la imagen dentro del contenedor */
   border-radius: 8px; /* Bordes redondeados */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para las imágenes */
+  background-color: #000; /* Fondo negro para imágenes con transparencia */
 }
 
 /* Botones de navegación del carrusel */
@@ -195,4 +195,14 @@
 
 .slick-dots li.slick-active button:before {
   color: white; /* Color de los puntos activos */
+}
+
+/* Estilo para la imagen de vista previa si no hay carrusel */
+.asset-detail-image {
+  width: 100%;
+  height: 400px; /* Altura fija para el contenedor */
+  object-fit: contain; /* Ajustar la imagen dentro del contenedor */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para las imágenes */
+  background-color: #000; /* Fondo negro para imágenes con transparencia */
 }

@@ -15,6 +15,9 @@ function AssetDetail() {
     const [nuevoComentario, setNuevoComentario] = useState('');
     const [enviando, setEnviando] = useState(false);
     const [mostrarTodos, setMostrarTodos] = useState(false);
+    
+
+    
 
     const { user } = useSelector((state) => state.auth);
 
@@ -90,8 +93,8 @@ function AssetDetail() {
     return (
         <div className="asset-detail-card">
             <div className="asset-image-section">
-                {/* Carrusel de imágenes con React Slick */}
-                {asset.images && asset.images.length > 0 ? (
+                {/* Mostrar carrusel solo si hay más de una imagen */}
+                {asset.images && asset.images.length > 1 ? (
                     <Slider {...settings} className="carousel">
                         {asset.images.map((img, index) => (
                             <div key={index}>
@@ -104,12 +107,27 @@ function AssetDetail() {
                         ))}
                     </Slider>
                 ) : (
+                    /* Mostrar una sola imagen si no hay más de una */
                     <img
-                        src={`https://lh3.googleusercontent.com/d/${extraerIdGoogle(asset.previewImage)}=s512`}
+                        src={`https://lh3.googleusercontent.com/d/${extraerIdGoogle(asset.images?.[0] || asset.previewImage)}=s512`}
                         alt={asset.title}
                         className="asset-detail-image"
                     />
                 )}
+
+                {/* Mostrar reproductor de audio si el asset es de tipo audio */}
+                {asset.type === 'audio' && asset.assetUrl && (
+    <div className="audio-player">
+        {console.log('URL del audio:', asset.assetUrl)}
+        <audio controls>
+            <source src={asset.assetUrl} />
+            Tu navegador no soporta el elemento de audio. 
+            <a href={asset.assetUrl} target="_blank" rel="noopener noreferrer">
+                Escuchar aquí
+            </a>
+        </audio>
+    </div>
+)}
 
                 <div className="asset-actions">
                     <button className="icon-button" title="Compartir">
