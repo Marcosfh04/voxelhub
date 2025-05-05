@@ -1,0 +1,217 @@
+
+.custom-audio-container {
+    width: 100%;
+    background-color: #000; /* Negro */
+    border-radius: 30px;
+    padding: 10px 15px;
+    margin: 10px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Controles principales */
+.custom-audio-controls {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+}
+
+/* Botón de reproducción/pausa */
+.custom-play-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #ffa600; /* Naranja */
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.custom-play-button:hover {
+    background-color: #ff8c00; /* Naranja más oscuro al hover */
+    transform: scale(1.05);
+}
+
+.custom-play-button svg {
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+}
+
+/* Display de tiempo */
+.custom-time-display {
+    font-family: monospace;
+    font-size: 14px;
+    color: white;
+    display: flex;
+    gap: 4px;
+    min-width: 80px;
+}
+
+.custom-time-separator {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Contenedor de la barra de progreso */
+.custom-progress-container {
+    flex-grow: 1;
+    position: relative;
+    height: 5px;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo del slider de progreso */
+.custom-progress-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background: #333; /* Fondo gris oscuro */
+    outline: none;
+    cursor: pointer;
+}
+
+/* Estilo del "thumb" (control deslizante) */
+.custom-progress-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ffa600; /* Naranja */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.custom-progress-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ffa600; /* Naranja */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.custom-progress-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.custom-progress-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* Estilo del "track" (barra de progreso) */
+.custom-progress-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    background: #333;
+    border-radius: 5px;
+}
+
+.custom-progress-slider::-moz-range-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    background: #333;
+    border-radius: 5px;
+}
+
+/* Botones de acción (compartir, descargar) */
+.custom-action-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.custom-action-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 5px;
+}
+
+.custom-action-button:hover {
+    transform: scale(1.2);
+}
+
+.custom-action-button svg path {
+    transition: fill 0.2s ease;
+}
+
+.custom-action-button:hover svg path {
+    fill: #ffa600; /* Naranja al hover */
+}
+
+/* Estilos para el estado de carga */
+.custom-audio-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    width: 100%;
+    background-color: #000; /* Negro */
+    color: #ffa600; /* Naranja */
+    border-radius: .0;
+    font-size: 0.9rem;
+    gap: 8px;
+    padding: 10px;
+}
+
+/* Spinner de carga */
+.custom-loading-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 166, 0, 0.3);
+    border-radius: 50%;
+    border-top-color: #ffa600; /* Naranja */
+    animation: custom-spin 1s ease-in-out infinite;
+}
+
+@keyframes custom-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Estilos para el estado de error */
+.custom-audio-error {
+    padding: 0.8rem;
+    color: #ff6b6b;
+    background-color: rgba(255, 107, 107, 0.1);
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.9rem;
+    width: 100%;
+}
+
+.custom-audio-error p {
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .custom-audio-container {
+        padding: 8px 10px;
+    }
+    
+    .custom-play-button {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .custom-time-display {
+        font-size: 12px;
+        min-width: 70px;
+    }
+    
+    .custom-action-buttons {
+        padding: 0 5px;
+    }
+}

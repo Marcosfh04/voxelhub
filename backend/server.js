@@ -3,6 +3,9 @@ const colors = require('colors')
 const dotenv = require('dotenv').config()
 const {errorHandler} = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
+const audioRoutes = require('./rutas/audioRoutes')
+const proxyRoutes = require('./rutas/proxyRoutes');
+
 
 const port = process.env.PORT || 5000
 
@@ -17,7 +20,8 @@ app.use('/api/goals', require('./rutas/rutasGoal'))
 app.use('/api/users', require('./rutas/rutasUser'))
 app.use('/api/assets', require('./rutas/rutasAsset'))
 app.use('/api/drive', require('./rutas/rutaDrive'))
-
+app.use('/api/audio', audioRoutes)
+app.use('/api/proxy', proxyRoutes);
 
 app.use(errorHandler)
 

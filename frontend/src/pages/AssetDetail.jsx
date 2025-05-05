@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import assetService from '../features/assets/assetService';
 import Spinner from '../components/Spinner';
-import Slider from 'react-slick'; // Importar React Slick
+import Slider from 'react-slick';
+import AudioPlayer from '../components/AudioPlayer'; // Importar el nuevo componente
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../css/AssetDetail.css';
@@ -16,9 +17,6 @@ function AssetDetail() {
     const [enviando, setEnviando] = useState(false);
     const [mostrarTodos, setMostrarTodos] = useState(false);
     
-
-    
-
     const { user } = useSelector((state) => state.auth);
 
     useEffect(() => {
@@ -58,8 +56,21 @@ function AssetDetail() {
     };
 
     const extraerIdGoogle = (url) => {
-        const match = url.match(/id=([a-zA-Z0-9_-]+)/);
-        return match ? match[1] : '';
+        if (!url) return '';
+        
+        // Para URLs en formato id=XXXX
+        const idMatch = url.match(/[?&]id=([a-zA-Z0-9_-]+)/i);
+        if (idMatch) return idMatch[1];
+        
+        // Para URLs en formato /d/XXXX/
+        const dMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)\/?/i);
+        if (dMatch) return dMatch[1];
+        
+        // Para URLs en formato uc?id=XXXX
+        const ucMatch = url.match(/uc\?id=([a-zA-Z0-9_-]+)/i);
+        if (ucMatch) return ucMatch[1];
+        
+        return '';
     };
 
     const descargarDesdeGoogleDrive = () => {
@@ -115,19 +126,12 @@ function AssetDetail() {
                     />
                 )}
 
-                {/* Mostrar reproductor de audio si el asset es de tipo audio */}
+                {/* Usar el nuevo componente de reproductor de audio */}
                 {asset.type === 'audio' && asset.assetUrl && (
-    <div className="audio-player">
-        {console.log('URL del audio:', asset.assetUrl)}
-        <audio controls>
-            <source src={asset.assetUrl} />
-            Tu navegador no soporta el elemento de audio. 
-            <a href={asset.assetUrl} target="_blank" rel="noopener noreferrer">
-                Escuchar aquí
-            </a>
-        </audio>
-    </div>
-)}
+                    <div className="audio-player-wrapper">
+                        <AudioPlayer driveUrl={asset.assetUrl} />
+                    </div>
+                )}
 
                 <div className="asset-actions">
                     <button className="icon-button" title="Compartir">
