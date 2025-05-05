@@ -35,11 +35,19 @@ const assetSchema = mongoose.Schema(
         createdAt: { type: Date, default: Date.now },
       }
     ],
+    images: {
+      type: [String], // Array de URLs
+      validate: [arrayLimit, '{PATH} excede el límite de 5 imágenes'],
+    },
   },
   
   {
     timestamps: true,
   }
 )
+
+function arrayLimit(val) {
+  return val.length <= 5;
+}
 
 module.exports = mongoose.model('Asset', assetSchema)

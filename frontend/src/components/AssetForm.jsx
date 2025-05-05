@@ -12,10 +12,12 @@ function AssetForm() {
     type: '2D',
     previewImage: '',
     assetUrl: '',
+    images: [], // Nuevo estado para las imágenes del carrusel
   })
 
   const [subiendoAsset, setSubiendoAsset] = useState(false)
   const [subiendoImagen, setSubiendoImagen] = useState(false)
+  const [subiendoCarrusel, setSubiendoCarrusel] = useState(false) // Estado para el carrusel
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
 
@@ -40,15 +42,27 @@ function AssetForm() {
     try {
       if (campo === 'assetUrl') setSubiendoAsset(true)
       if (campo === 'previewImage') setSubiendoImagen(true)
+      if (campo === 'images') setSubiendoCarrusel(true)
 
       const res = await axios.post('/api/drive/upload', formData)
-      setForm((prev) => ({ ...prev, [campo]: res.data.url }))
+
+      if (campo === 'images') {
+        // Agregar la URL al array de imágenes
+        setForm((prev) => ({
+          ...prev,
+          images: [...prev.images, res.data.url],
+        }))
+      } else {
+        setForm((prev) => ({ ...prev, [campo]: res.data.url }))
+      }
+
       toast.success(`${campo === 'assetUrl' ? 'Asset' : 'Imagen'} subida correctamente`)
     } catch (err) {
       toast.error(`Error al subir ${campo === 'assetUrl' ? 'el asset' : 'la imagen'}`)
     } finally {
       setSubiendoAsset(false)
       setSubiendoImagen(false)
+      setSubiendoCarrusel(false)
     }
   }
 
@@ -57,6 +71,10 @@ function AssetForm() {
 
     if (!form.previewImage.startsWith('http') || !form.assetUrl.startsWith('http')) {
       return toast.error('Las URLs deben empezar por http:// o https://')
+    }
+
+    if (form.images.length > 5) {
+      return toast.error('Solo puedes subir un máximo de 5 imágenes para el carrusel.')
     }
 
     dispatch(createAsset(form))
@@ -69,6 +87,7 @@ function AssetForm() {
           type: '2D',
           previewImage: '',
           assetUrl: '',
+          images: [],
         })
       })
       .catch(() => toast.error('Error al guardar el asset'))
@@ -110,7 +129,7 @@ function AssetForm() {
           <option value="other">Otro</option>
         </select>
 
-        {/* NUEVO diseño de imagen descriptiva */}
+        {/* Imagen descriptiva */}
         <label>Imagen descriptiva</label>
         <div
           className="asset-upload-box"
@@ -145,14 +164,35 @@ function AssetForm() {
           onChange={(e) => subirArchivoADrive(e.target.files[0], 'assetUrl')}
         />
         {subiendoAsset && <p>Subiendo asset...</p>}
-        {form.assetUrl && (
-          <p>
-            <strong>Asset subido:</strong>{' '}
-            <a href={form.assetUrl} target="_blank" rel="noreferrer">
-              Ver archivo
-            </a>
-          </p>
-        )}
+        
+
+        {/* Carrusel de imágenes */}
+        <label>Imágenes del carrusel (máximo 5)</label>
+        <div className="asset-upload-box" onClick={() => document.getElementById('carouselInput').click()}>
+          {form.images.length > 0 ? (
+            form.images.map((img, index) => (
+              <img
+                key={index}
+                src={`https://lh3.googleusercontent.com/d/${extraerIdGoogle(img)}=s128`}
+                alt={`Carrusel ${index + 1}`}
+              />
+            ))
+          ) : (
+            <>
+              <i className="fas fa-images fa-3x"></i>
+              <p>Selecciona imágenes</p>
+            </>
+          )}
+        </div>
+
+        <input
+          id="carouselInput"
+          type="file"
+          accept="image/*"
+          onChange={(e) => subirArchivoADrive(e.target.files[0], 'images')}
+          style={{ display: 'none' }}
+        />
+        {subiendoCarrusel && <p>Subiendo imagen al carrusel...</p>}
 
         <button type="submit">Subir Asset</button>
       </form>

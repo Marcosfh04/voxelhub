@@ -13,11 +13,17 @@ const getAssets = asyncHandler(async (req, res) => {
 // @route   POST /api/assets
 // @access  Private
 const createAsset = asyncHandler(async (req, res) => {
-  const { title, description, type, previewImage, assetUrl } = req.body
+  const { title, description, type, previewImage, assetUrl, images } = req.body;
 
   if (!title || !description || !type || !previewImage || !assetUrl) {
-    res.status(400)
-    throw new Error('Please fill in all fields')
+    res.status(400);
+    throw new Error('Please fill in all fields');
+  }
+
+  // Validar que el array de imágenes no exceda el límite de 5
+  if (images && images.length > 5) {
+    res.status(400);
+    throw new Error('You can upload a maximum of 5 images for the carousel');
   }
 
   const asset = await Asset.create({
@@ -27,12 +33,11 @@ const createAsset = asyncHandler(async (req, res) => {
     type,
     previewImage,
     assetUrl,
-  })
+    images, // Guardar las imágenes del carrusel
+  });
 
-  console.log('✅ req.user:', req.user)
-
-  res.status(201).json(asset)
-})
+  res.status(201).json(asset);
+});
 
 // @desc    Delete asset
 // @route   DELETE /api/assets/:id
@@ -59,24 +64,32 @@ const deleteAsset = asyncHandler(async (req, res) => {
 // @route   PUT /api/assets/:id
 // @access  Private
 const updateAsset = asyncHandler(async (req, res) => {
-  const asset = await Asset.findById(req.params.id)
+  const { images } = req.body;
+
+  const asset = await Asset.findById(req.params.id);
 
   if (!asset) {
-    res.status(404)
-    throw new Error('Asset not found')
+    res.status(404);
+    throw new Error('Asset not found');
   }
 
   if (asset.user.toString() !== req.user.id) {
-    res.status(401)
-    throw new Error('Not authorized')
+    res.status(401);
+    throw new Error('Not authorized');
+  }
+
+  // Validar que el array de imágenes no exceda el límite de 5
+  if (images && images.length > 5) {
+    res.status(400);
+    throw new Error('You can upload a maximum of 5 images for the carousel');
   }
 
   const updated = await Asset.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
-  })
+  });
 
-  res.status(200).json(updated)
-})
+  res.status(200).json(updated);
+});
 
 // @desc    Get one asset
 // @route   GET /api/assets/:id
@@ -84,15 +97,15 @@ const updateAsset = asyncHandler(async (req, res) => {
 const getAssetById = asyncHandler(async (req, res) => {
   const asset = await Asset.findById(req.params.id)
     .populate('user', 'name') // autor
-    .populate('comments.user', 'name')
+    .populate('comments.user', 'name');
 
   if (!asset) {
-    res.status(404)
-    throw new Error('Asset no encontrado')
+    res.status(404);
+    throw new Error('Asset no encontrado');
   }
 
-  res.json(asset)
-})
+  res.json(asset); // Incluye el campo `images` automáticamente
+});
 
 
 const comentarAsset = asyncHandler(async (req, res) => {
