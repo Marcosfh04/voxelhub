@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { updateUser } from '../features/auth/authSlice';
+import { updateUser, logout } from '../features/auth/authSlice'; // Importa logout
 import '../css/EditarPerfil.css';
 
 function EditarPerfil() {
@@ -11,7 +11,6 @@ function EditarPerfil() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Redirigir al login si no está autenticado
   useEffect(() => {
     if (!user) {
       navigate('/login');
@@ -96,7 +95,8 @@ function EditarPerfil() {
       .unwrap()
       .then(() => {
         toast.success('Perfil actualizado correctamente');
-        navigate('/dashboard'); // Redirigir al Dashboard
+        dispatch(logout()); // Cierra sesión después de guardar los cambios
+        navigate('/login'); // Redirige al login
       })
       .catch((err) => {
         toast.error('Error al actualizar el perfil');

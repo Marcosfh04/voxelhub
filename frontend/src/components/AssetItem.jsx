@@ -16,8 +16,6 @@ function AssetItem({ asset }) {
     return match ? match[1] : ''
   }
 
-
-
   return (
 
     <div className='asset-card' onClick={handleClick}>
