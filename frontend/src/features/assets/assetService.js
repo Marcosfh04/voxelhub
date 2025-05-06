@@ -52,7 +52,7 @@ const comentarAsset = async (id, comentario, token) => {
 const getUserAssets = async (token) => {
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`, // Asegúrate de que el token se envía correctamente
     },
   };
 

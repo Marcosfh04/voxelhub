@@ -108,10 +108,11 @@ const getAssetById = asyncHandler(async (req, res) => {
 });
 
 const getUserAssets = asyncHandler(async (req, res) => {
+  console.log('Usuario autenticado:', req.user); // Verifica el usuario autenticado
   const assets = await Asset.find({ user: req.user.id }); // Filtrar por el usuario autenticado
+  console.log('Assets encontrados:', assets); // Verifica los assets encontrados
   res.status(200).json(assets);
 });
-
 
 const comentarAsset = asyncHandler(async (req, res) => {
   const { text } = req.body

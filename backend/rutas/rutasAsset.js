@@ -11,8 +11,8 @@ const {
 } = require('../controllers/assetController');
 
 const { protect } = require('../middleware/authMiddleware');
-
-router.get('/user', getUserAssets); 
+  
+router.get('/user', protect, getUserAssets); 
 router.get('/:id', getAssetById)
 router.route('/').get(getAssets).post(protect, createAsset);
 router.route('/:id').put(protect, updateAsset).delete(protect, deleteAsset);
