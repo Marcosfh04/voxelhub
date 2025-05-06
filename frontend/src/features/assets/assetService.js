@@ -49,12 +49,25 @@ const comentarAsset = async (id, comentario, token) => {
   return response.data
 }
 
+const getUserAssets = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get('/api/assets/user', config);
+  console.log('Respuesta del backend:', response.data); // Verifica la respuesta
+  return response.data;
+};
+
 const assetService = {
   getAssets,
   createAsset,
   deleteAsset,
   getAssetById,
   comentarAsset, 
+  getUserAssets,
 
 }
 

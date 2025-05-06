@@ -30,6 +30,33 @@ export const register = createAsyncThunk(
   }
 )
 
+export const updateUser = createAsyncThunk(
+  'auth/updateUser',
+  async (userData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token; // Obtener el token del usuario
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response = await authService.updateUser(userData, config); // Llamar al servicio
+      if (response.data) {
+        localStorage.setItem('user', JSON.stringify(response.data)); // Actualizar localStorage
+      }
+
+      return response.data;
+    } catch (error) {
+      const message =
+        (error.response && error.response.data && error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Login user
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
@@ -91,6 +118,19 @@ export const authSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.user = null
       })
+      .addCase(updateUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload; // Actualizar el usuario en el estado
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      });
   },
 })
 

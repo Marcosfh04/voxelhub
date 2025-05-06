@@ -107,6 +107,11 @@ const getAssetById = asyncHandler(async (req, res) => {
   res.json(asset); // Incluye el campo `images` automáticamente
 });
 
+const getUserAssets = asyncHandler(async (req, res) => {
+  const assets = await Asset.find({ user: req.user.id }); // Filtrar por el usuario autenticado
+  res.status(200).json(assets);
+});
+
 
 const comentarAsset = asyncHandler(async (req, res) => {
   const { text } = req.body
@@ -137,4 +142,5 @@ module.exports = {
   updateAsset,
   getAssetById,
   comentarAsset,
+  getUserAssets,
 }

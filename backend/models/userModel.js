@@ -13,7 +13,13 @@ const userSchema = moongoose.Schema({
     password: {
         type: String,
         required: [true,'Por favor ingrese su contraseña']
-    },/*
+    },
+    profileImage: {
+        type: String, // URL de la imagen subida a Google Drive
+        required: false,
+    },
+    
+    /*
     isAdmin: {
         type: Boolean,
         required: true,

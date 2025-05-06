@@ -47,9 +47,6 @@
     transition: background-color 0.3s ease;
   }
   
-  .header .btn:hover {
-    background-color: #222;
-  }
 
   .logo a{
     color: #fff;
