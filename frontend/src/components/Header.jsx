@@ -52,7 +52,13 @@ function Header() {
         />
         <button type="submit">Buscar</button>
       </form>
+      
       <ul>
+        <li>
+          <Link to="/categories">
+            Categorías
+          </Link>
+        </li>
         <li>
           <button className="btn" onClick={handleUploadClick}>
             <FaUpload /> Subir Asset
@@ -87,6 +93,7 @@ function Header() {
           </>
         )}
       </ul>
+
     </header>
   );
 }

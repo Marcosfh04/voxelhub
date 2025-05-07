@@ -13,6 +13,7 @@ import Perfil from './pages/Perfil'
 import EditarPerfil from './components/EditarPerfil'
 import EditarAsset from './components/EditarAsset'
 import SearchResults from './pages/SearchResults';
+import Categories from './pages/Categories';
 import VideoPlayer from './components/VideoPlayer'
 
 function AppWrapper() {
@@ -30,6 +31,7 @@ function AppWrapper() {
         <Route path="/assets/:id" element={<AssetDetail />} />
         <Route path='/subir' element={<AssetForm />} />
         <Route path='/perfil' element={<Perfil />} />
+        <Route path="/categories" element={<Categories />} /> 
         <Route path='/editar-perfil' element={<EditarPerfil />} />
         <Route path='/editar-asset/:id' element={<EditarAsset />} />
         <Route path="/search" element={<SearchResults />} /> 

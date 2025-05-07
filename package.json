@@ -12,6 +12,10 @@
   "author": "Grupo 5 Viernes 11-13",
   "license": "MIT",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.8.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.6.1",
     "axios": "^1.8.4",
     "bcryptjs": "^3.0.2",
     "colors": "^1.4.0",
@@ -24,10 +28,15 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.0",
     "multer": "^1.4.5-lts.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.5.3",
     "react-slick": "^0.30.3",
     "react-toastify": "^11.0.5",
     "slick-carousel": "^1.8.1",
-    "swiper": "^6.8.4"
+    "swiper": "^6.8.4",
+    "web-vitals": "^4.2.4"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
