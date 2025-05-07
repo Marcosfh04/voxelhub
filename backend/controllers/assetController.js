@@ -139,6 +139,7 @@ const comentarAsset = asyncHandler(async (req, res) => {
 
   res.status(201).json(asset.comments)
 })
+
 // @desc    Buscar assets por título, descripción y nombre del usuario
 // @route   GET /api/assets/search
 // @access  Public
