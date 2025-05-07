@@ -122,7 +122,9 @@ function Header() {
       <div className={`nav-container ${menuOpen ? 'active' : ''}`} ref={navRef}>
         <ul className="nav-menu">
           <li>
-            <Link to="/categorias" onClick={closeMenu}>Categorías</Link>
+            <button className="btn" onClick={() => navigate('/categories')}>
+              Categorías
+            </button>
           </li>
           <li>
             <button className="btn" onClick={handleUploadClick}>
