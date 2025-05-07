@@ -12,6 +12,7 @@
 
 .asset-card:hover {
   transform: scale(1.03);
+  box-shadow: 0 4px 8px orange;
 }
 
 .asset-image {
@@ -25,6 +26,10 @@
 .asset-info {
   margin-top: 10px;
   text-align: center;
+}
+
+.asset-info p{
+  color: orange;
 }
 
 .action-buttons {

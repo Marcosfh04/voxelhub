@@ -12,6 +12,7 @@ import ScrollToTop from './components/ScrollToTop'
 import Perfil from './pages/Perfil'
 import EditarPerfil from './components/EditarPerfil'
 import EditarAsset from './components/EditarAsset'
+import SearchResults from './pages/SearchResults';
 
 function AppWrapper() {
   const location = useLocation()
@@ -30,6 +31,7 @@ function AppWrapper() {
         <Route path='/perfil' element={<Perfil />} />
         <Route path='/editar-perfil' element={<EditarPerfil />} />
         <Route path='/editar-asset/:id' element={<EditarAsset />} />
+        <Route path="/search" element={<SearchResults />} /> 
       </Routes>
     </div>
   )

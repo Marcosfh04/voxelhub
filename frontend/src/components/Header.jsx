@@ -3,11 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/auth/authSlice';
 import '../css/Header.css';
+import { useState } from 'react';
 
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+
+  const [searchTerm, setSearchTerm] = useState('');
 
   const onLogout = () => {
     dispatch(logout());
@@ -27,11 +30,28 @@ function Header() {
     navigate('/perfil');
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/search?q=${searchTerm}`);
+      setSearchTerm('');
+    }
+  };
+
   return (
     <header className="header">
       <div className="logo">
         <Link to="/">VoxelHub</Link>
       </div>
+      <form className="search-bar" onSubmit={handleSearch}>
+        <input
+          type="text"
+          placeholder="Buscar..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button type="submit">Buscar</button>
+      </form>
       <ul>
         <li>
           <button className="btn" onClick={handleUploadClick}>
@@ -42,7 +62,6 @@ function Header() {
         {user ? (
           <>
             <li>
-              {/* Cambiar el enlace a un botón */}
               <button className="btn" onClick={handleProfileClick}>
                 <FaUser /> {user.name}
               </button>

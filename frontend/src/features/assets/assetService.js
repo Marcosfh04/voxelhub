@@ -75,6 +75,12 @@ const updateAsset = async (id, assetData, token) => {
   return response.data;
 };
 
+// Buscar assets por nombre
+const searchAssets = async (query) => {
+  const response = await axios.get(`${API_URL}search?q=${query}`);
+  return response.data;
+};
+
 
 const assetService = {
   getAssets,
@@ -83,7 +89,8 @@ const assetService = {
   getAssetById,
   comentarAsset, 
   getUserAssets,
-  updateAsset, // Asegúrate de exportar la función de actualización
+  updateAsset, 
+  searchAssets,
 
 }
 

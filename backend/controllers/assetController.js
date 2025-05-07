@@ -1,5 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const Asset = require('../models/assetModel')
+const diacritics = require('diacritics'); // Instala esta librería con `npm install diacritics`
+
 
 // @desc    Get all assets
 // @route   GET /api/assets
@@ -137,8 +139,45 @@ const comentarAsset = asyncHandler(async (req, res) => {
 
   res.status(201).json(asset.comments)
 })
+// @desc    Buscar assets por título, descripción y nombre del usuario
+// @route   GET /api/assets/search
+// @access  Public
+const searchAssets = asyncHandler(async (req, res) => {
+  const query = req.query.q; // Obtiene el término de búsqueda de la query string
 
+  if (!query) {
+    res.status(400);
+    throw new Error('No se proporcionó un término de búsqueda');
+  }
 
+  try {
+    // Elimina acentos del término de búsqueda
+    const normalizedQuery = diacritics.remove(query).toLowerCase();
+
+    // Obtiene todos los assets y realiza un populate para incluir el nombre del usuario
+    const results = await Asset.find()
+      .populate('user', 'name') // Obtiene el nombre del usuario
+      .lean(); // Convierte los documentos a objetos JavaScript simples
+
+    // Filtra los resultados buscando coincidencias en título, descripción o nombre del usuario
+    const filteredResults = results.filter((asset) => {
+      const normalizedTitle = diacritics.remove(asset.title || '').toLowerCase();
+      const normalizedDescription = diacritics.remove(asset.description || '').toLowerCase();
+      const normalizedUserName = diacritics.remove(asset.user?.name || '').toLowerCase();
+
+      return (
+        normalizedTitle.includes(normalizedQuery) ||
+        normalizedDescription.includes(normalizedQuery) ||
+        normalizedUserName.includes(normalizedQuery)
+      );
+    });
+
+    res.status(200).json(filteredResults);
+  } catch (error) {
+    console.error('Error al buscar assets:', error);
+    res.status(500).json({ message: 'Error al buscar assets' });
+  }
+});
 
 module.exports = {
   getAssets,
@@ -148,4 +187,5 @@ module.exports = {
   getAssetById,
   comentarAsset,
   getUserAssets,
+  searchAssets,
 }

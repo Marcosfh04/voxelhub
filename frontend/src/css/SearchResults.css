@@ -1,0 +1,76 @@
+.search-results-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.search-results-container h1 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+
+p {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+}
+
+.sort-dropdown {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sort-dropdown label {
+  font-size: 1rem;
+  color: orange;
+}
+
+.sort-dropdown select {
+  padding: 5px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  font-size: 1.2rem; /* Aumenta el tamaño de las flechas */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: black;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  color: white
+}
+
+.pagination button:hover {
+  background-color: #bbbbbb;
+}
+
+.pagination button:disabled {
+  background-color: #444444;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 1rem;
+  color: white;
+}
