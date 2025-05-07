@@ -10,6 +10,7 @@ function Categories() {
   const query = new URLSearchParams(location.search).get('q') || '';
   const [searchInput, setSearchInput] = useState(query);
   const [results, setResults] = useState([]);
+  const [randomAssets, setRandomAssets] = useState([]); // Estado para assets aleatorios
   const [loading, setLoading] = useState(true);
   const [sortOption, setSortOption] = useState('recent');
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,6 +22,22 @@ function Categories() {
     'code': false,
   });
   const resultsPerPage = 12;
+
+  useEffect(() => {
+    const fetchRandomAssets = async () => {
+      try {
+        const data = await assetService.getAssets(); // Obtén todos los assets
+        const shuffled = data.sort(() => 0.5 - Math.random()); // Mezcla aleatoriamente
+        setRandomAssets(shuffled.slice(0, resultsPerPage)); // Selecciona los primeros N aleatorios
+      } catch (err) {
+        console.error('Error fetching random assets:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRandomAssets();
+  }, []);
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -47,7 +64,9 @@ function Categories() {
       }
     };
 
-    fetchResults();
+    if (searchInput) {
+      fetchResults();
+    }
   }, [searchInput, filters]);
 
   useEffect(() => {
@@ -171,34 +190,45 @@ function Categories() {
             </select>
           </div>
 
-          {results.length > 0 ? (
+          {searchInput || Object.values(filters).some((value) => value) ? (
+            results.length > 0 ? (
+              <>
+                <div className="results-grid">
+                  {paginatedResults().map((asset) => (
+                    <AssetItem key={asset._id} asset={asset} />
+                  ))}
+                </div>
+
+                <div className="pagination">
+                  <button
+                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                  >
+                    &#8592;
+                  </button>
+                  <span>
+                    Página {currentPage} de {totalPages}
+                  </span>
+                  <button
+                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                  >
+                    &#8594;
+                  </button>
+                </div>
+              </>
+            ) : (
+              <p>No se encontraron resultados.</p>
+            )
+          ) : (
             <>
+              <h2>Assets Aleatorios</h2>
               <div className="results-grid">
-                {paginatedResults().map((asset) => (
+                {randomAssets.map((asset) => (
                   <AssetItem key={asset._id} asset={asset} />
                 ))}
               </div>
-
-              <div className="pagination">
-                <button
-                  onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                  disabled={currentPage === 1}
-                >
-                  &#8592;
-                </button>
-                <span>
-                  Página {currentPage} de {totalPages}
-                </span>
-                <button
-                  onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                  disabled={currentPage === totalPages}
-                >
-                  &#8594;
-                </button>
-              </div>
             </>
-          ) : (
-            <p>No se encontraron resultados.</p>
           )}
         </div>
       </div>
