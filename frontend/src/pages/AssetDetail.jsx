@@ -18,6 +18,7 @@ function AssetDetail() {
   const [nuevoComentario, setNuevoComentario] = useState('');
   const [enviando, setEnviando] = useState(false);
   const [mostrarTodos, setMostrarTodos] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const { user } = useSelector((state) => state.auth);
 
@@ -58,6 +59,15 @@ function AssetDetail() {
       setEnviando(false);
     }
   };
+
+  const handleShare = () => {
+    const url = `${window.location.origin}/assets/${id}`; // Construir la URL del asset
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true); // Mostrar el mensaje de confirmación
+      setTimeout(() => setCopied(false), 2000); // Ocultar el mensaje después de 2 segundos
+    });
+  };
+
 
   const extraerIdGoogle = (url) => {
     if (!url) return '';
@@ -135,7 +145,7 @@ function AssetDetail() {
         )}
 
         <div className="asset-actions">
-          <button className="icon-button" title="Compartir">
+          <button className="icon-button" title="Compartir" onClick={handleShare}>
             <i className="fas fa-share-alt"></i>
           </button>
           {asset.assetUrl && (
@@ -148,6 +158,7 @@ function AssetDetail() {
             </button>
           )}
         </div>
+        {copied && <p className="copied-message">¡URL copiada al portapapeles!</p>} {/* Mensaje de confirmación */}
       </div>
 
       <div className="asset-info-section">

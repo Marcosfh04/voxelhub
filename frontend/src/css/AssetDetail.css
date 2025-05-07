@@ -219,3 +219,26 @@
   border-radius: 50%;
   margin-right: 10px;
 }
+
+.copied-message {
+  color: #ffa500; /* Naranja */
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+  animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
