@@ -21,7 +21,7 @@ function EditarAsset() {
 
   const [loading, setLoading] = useState(true);
   const [subiendoImagen, setSubiendoImagen] = useState(false);
-  const [subiednoAsset, setSubiendoAsset] = useState(false);
+  const setSubiendoAsset = useState(false);
   const [subiendoCarrusel, setSubiendoCarrusel] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [carouselImages, setCarouselImages] = useState([]);
