@@ -27,12 +27,12 @@
     color: #222;
 }
 
-/* Barra de búsqueda */
+
 .search-bar {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-left: 20px; /* Margen entre el logo y la barra de búsqueda */
+    margin-left: 20px; 
 }
 
 .search-bar input {

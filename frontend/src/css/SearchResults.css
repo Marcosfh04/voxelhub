@@ -8,6 +8,7 @@
   font-size: 1.8rem;
   margin-bottom: 20px;
   color: #333;
+  text-align: center; /* Centrar el título */
 }
 
 .results-grid {
@@ -16,6 +17,13 @@
   gap: 20px;
 }
 
+.results-grid > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 
 p {
   font-size: 1rem;
@@ -28,6 +36,7 @@ p {
   display: flex;
   align-items: center;
   gap: 10px;
+  justify-content: center; /* Centrar el desplegable */
 }
 
 .sort-dropdown label {
@@ -58,7 +67,7 @@ p {
   background-color: black;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  color: white
+  color: white;
 }
 
 .pagination button:hover {
@@ -73,4 +82,64 @@ p {
 .pagination span {
   font-size: 1rem;
   color: white;
+}
+
+/* Media queries para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .search-results-container {
+    padding: 10px;
+  }
+
+  .search-results-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .results-grid {
+    grid-template-columns: repeat(2, 1fr); /* Dos items por fila */
+    gap: 15px;
+  }
+
+  .results-grid > div {
+    max-width: 180px; /* Ajusta el tamaño de los items */
+    margin: 0 auto;
+  }
+
+  .sort-dropdown {
+    flex-direction: column; /* Cambia a diseño vertical */
+    gap: 5px;
+  }
+
+  .pagination button {
+    font-size: 1rem; /* Reduce el tamaño de las flechas */
+    padding: 5px 8px;
+  }
+
+  .pagination span {
+    font-size: 0.9rem; /* Reduce el tamaño del texto */
+  }
+}
+
+@media (max-width: 480px) {
+  .search-results-container h1 {
+    font-size: 1.2rem;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr; /* Un item por fila */
+    gap: 10px;
+  }
+
+  .results-grid > div {
+    max-width: 300px; /* Ajusta el tamaño del item */
+    margin: 0 auto;
+  }
+
+  .pagination button {
+    font-size: 0.9rem; /* Reduce aún más el tamaño de las flechas */
+    padding: 4px 6px;
+  }
+
+  .pagination span {
+    font-size: 0.8rem;
+  }
 }

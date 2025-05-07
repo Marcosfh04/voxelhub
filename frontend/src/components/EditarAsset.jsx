@@ -21,10 +21,15 @@ function EditarAsset() {
 
   const [loading, setLoading] = useState(true);
   const [subiendoImagen, setSubiendoImagen] = useState(false);
-  const [subiendoAsset, setSubiendoAsset] = useState(false);
-  const [subiendoCarrusel, setSubiendoCarrusel] = useState(false); // Nuevo estado
+  const [setSubiendoAsset] = useState(false);
+  const [subiendoCarrusel, setSubiendoCarrusel] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [carouselImages, setCarouselImages] = useState([]);
+
+  const extraerIdGoogle = (url) => {
+    const match = url.match(/id=([a-zA-Z0-9_-]+)/);
+    return match ? match[1] : '';
+  };
 
   useEffect(() => {
     const fetchAsset = async () => {
@@ -86,28 +91,7 @@ function EditarAsset() {
     } finally {
       setSubiendoImagen(false);
       setSubiendoAsset(false);
-      setSubiendoCarrusel(false); // Finaliza la carga del carrusel
-    }
-  };
-
-  const onImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      subirArchivoADrive(file, 'previewImage');
-    }
-  };
-
-  const onAssetChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      subirArchivoADrive(file, 'assetUrl');
-    }
-  };
-
-  const onCarouselImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      subirArchivoADrive(file, 'images');
+      setSubiendoCarrusel(false);
     }
   };
 
@@ -121,7 +105,6 @@ function EditarAsset() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log('Formulario enviado');
     try {
       await assetService.updateAsset(id, formData, user.token);
       navigate('/perfil'); // Redirige al perfil después de guardar
@@ -179,7 +162,7 @@ function EditarAsset() {
           >
             {previewImage ? (
               <img
-                src={previewImage}
+                src={`https://lh3.googleusercontent.com/d/${extraerIdGoogle(previewImage)}=s512`}
                 alt="Previsualización"
                 style={{ maxWidth: '100%', borderRadius: '8px' }}
               />
@@ -191,18 +174,10 @@ function EditarAsset() {
             id="previewInput"
             type="file"
             accept="image/*"
-            onChange={onImageChange}
+            onChange={(e) => subirArchivoADrive(e.target.files[0], 'previewImage')}
             style={{ display: 'none' }}
           />
           {subiendoImagen && <p>Subiendo imagen...</p>}
-        </div>
-        <div className="form-group">
-          <label>Archivo del asset</label>
-          <input
-            type="file"
-            onChange={onAssetChange}
-          />
-          {subiendoAsset && <p>Subiendo asset...</p>}
         </div>
         <div className="form-group">
           <label>Imágenes del carrusel</label>
@@ -217,7 +192,7 @@ function EditarAsset() {
                 }}
               >
                 <img
-                  src={img}
+                  src={`https://lh3.googleusercontent.com/d/${extraerIdGoogle(img)}=s128`}
                   alt={`Carrusel ${index + 1}`}
                   style={{ maxWidth: '100px', borderRadius: '8px' }}
                 />
@@ -257,23 +232,18 @@ function EditarAsset() {
                 marginTop: '10px',
               }}
             >
-              <p>Haz clic para agregar más imágenes</p>
+              <p>Haz clic para agregar imágenes</p>
             </div>
           </div>
           <input
             id="carouselInput"
             type="file"
             accept="image/*"
-            onChange={onCarouselImageChange}
+            onChange={(e) => subirArchivoADrive(e.target.files[0], 'images')}
             style={{ display: 'none' }}
           />
-          {subiendoCarrusel && <p style={{ color: 'orange', fontWeight: 'bold' }}>Subiendo Imagen al Carrusel...</p>}
+          {subiendoCarrusel && <p>Subiendo imagen al carrusel...</p>}
         </div>
-        {(subiendoImagen || subiendoAsset) && (
-          <p style={{ color: 'orange', fontWeight: 'bold' }}>
-            {subiendoImagen ? 'Subiendo Imagen...' : 'Subiendo Asset...'}
-          </p>
-        )}
         <button type="submit" className="btn btn-primary">
           Guardar Cambios
         </button>
