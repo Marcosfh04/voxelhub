@@ -19,6 +19,9 @@ function AssetDetail() {
   const [enviando, setEnviando] = useState(false);
   const [mostrarTodos, setMostrarTodos] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [hasRated, setHasRated] = useState(false);
+  const [isVoting, setIsVoting] = useState(false);
 
   const { user } = useSelector((state) => state.auth);
 
@@ -28,6 +31,9 @@ function AssetDetail() {
         const data = await assetService.getAssetById(id);
         console.log('Asset recibido:', data); // Depuración: Verificar el asset completo
         setAsset(data);
+        if (data.ratings.some((r) => r.user === user?._id)) {
+          setHasRated(true);
+        }
       } catch (err) {
         console.error('Error al obtener asset:', err);
       } finally {
@@ -36,7 +42,7 @@ function AssetDetail() {
     };
 
     fetchAsset();
-  }, [id]);
+  }, [id, user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,6 +104,25 @@ function AssetDetail() {
     }
   };
 
+  const handleRating = (value) => {
+    if (!hasRated) {
+      setRating(value);
+    }
+  };
+
+  const submitRating = async () => {
+    if (rating > 0) {
+      try {
+        await assetService.rateAsset(id, { value: rating }, user.token);
+        setHasRated(true);
+        window.location.reload(); // Recargar para actualizar las valoraciones
+      } catch (err) {
+        console.error('Error al enviar valoración:', err);
+      }
+    }
+  };
+
+
   if (loading) return <Spinner />;
   if (!asset) return <p>No se ha encontrado el asset.</p>;
 
@@ -109,6 +134,11 @@ function AssetDetail() {
     slidesToScroll: 1,
     arrows: true,
   };
+
+  const totalRatings = asset.ratings.length;
+  const averageRating = totalRatings > 0
+  ? Number((asset.ratings.reduce((sum, r) => sum + r.value, 0) / totalRatings).toFixed(1))
+  : 0;
 
   return (
     <div className="asset-detail-card">
@@ -166,8 +196,7 @@ function AssetDetail() {
           Asset {asset.type.toUpperCase()} – {asset.title}
         </h2>
         <p>
-          <strong>Descripción:</strong>
-          <br />
+          <strong>Descripción: </strong>
           {asset.description}
         </p>
         <p>
@@ -181,7 +210,46 @@ function AssetDetail() {
         <p>
           <strong>Categoria:</strong> {asset.type}
         </p>
+        <div className="rating-section">
+          <p>Hay {totalRatings} valoraciones (Media: {averageRating})</p>
+          <div className="stars">
+            {[1, 2, 3, 4, 5].map((star) => {
+              const isHalfStar = !Number.isInteger(averageRating) && Math.ceil(averageRating) === star;
+              const isSelected = star <= rating; // Determina si la estrella está seleccionada por el usuario
 
+              // Mostrar estrellas según el estado de votación
+              const starClass = isVoting
+                ? isSelected
+                  ? 'fa-star filled'
+                  : 'fa-star'
+                : isHalfStar
+                ? 'fa-star half-filled'
+                : star <= averageRating
+                ? 'fa-star filled'
+                : 'fa-star';
+
+              return (
+                <i
+                  key={star}
+                  className={`fas ${starClass}`}
+                  onClick={() => {
+                    if (!hasRated) {
+                      setIsVoting(true); // Activar el estado de votación
+                      handleRating(star);
+                    }
+                  }}
+                  style={{ cursor: hasRated ? 'not-allowed' : 'pointer' }}
+                ></i>
+              );
+            })}
+          </div>
+          {!hasRated && (
+            <button onClick={submitRating} disabled={rating === 0}>
+              Enviar valoración
+            </button>
+          )}
+      </div>
+      
         <div className="asset-comments">
           <h3>Comentarios</h3>
 

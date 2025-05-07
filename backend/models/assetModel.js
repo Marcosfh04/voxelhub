@@ -39,6 +39,12 @@ const assetSchema = mongoose.Schema(
       type: [String], // Array de URLs
       validate: [arrayLimit, '{PATH} excede el límite de 5 imágenes'],
     },
+    ratings: [
+      {
+        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        value: { type: Number, required: true, min: 1, max: 5 },
+      },
+    ],
   },
   
   {

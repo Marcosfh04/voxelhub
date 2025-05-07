@@ -62,6 +62,18 @@ function Categories() {
         return [...results].sort((a, b) => a.title.localeCompare(b.title));
       case 'category':
         return [...results].sort((a, b) => a.type.localeCompare(b.type));
+      case 'ratings':
+        return [...results].sort((a, b) => {
+          const avgRatingA =
+            a.ratings.length > 0
+              ? a.ratings.reduce((sum, r) => sum + r.value, 0) / a.ratings.length
+              : 0;
+          const avgRatingB =
+            b.ratings.length > 0
+              ? b.ratings.reduce((sum, r) => sum + r.value, 0) / b.ratings.length
+              : 0;
+          return avgRatingB - avgRatingA; // Orden descendente
+        });
       default:
         return results;
     }
@@ -147,7 +159,7 @@ function Categories() {
           <h1>Explorar Categorías</h1>
 
           {/* Barra de búsqueda */}
-          <form onSubmit={handleSearch} className="search-bar">
+          <form onSubmit={handleSearch} className="search-bar2">
             <input
               type="text"
               name="search"
@@ -168,6 +180,7 @@ function Categories() {
               <option value="recent">Más recientes</option>
               <option value="alphabetical">Orden alfabético</option>
               <option value="category">Categorías (alfabético)</option>
+              <option value="ratings">Mejor valorados</option>
             </select>
           </div>
 

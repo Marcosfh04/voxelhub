@@ -180,6 +180,32 @@ const searchAssets = asyncHandler(async (req, res) => {
   }
 });
 
+
+const rateAsset = asyncHandler(async (req, res) => {
+  const { value } = req.body;
+  const asset = await Asset.findById(req.params.id);
+
+  if (!asset) {
+    res.status(404);
+    throw new Error('Asset not found');
+  }
+
+  const existingRating = asset.ratings.find(
+    (rating) => rating.user.toString() === req.user.id
+  );
+
+  if (existingRating) {
+    res.status(400);
+    throw new Error('You have already rated this asset');
+  }
+
+  asset.ratings.push({ user: req.user.id, value });
+  await asset.save();
+
+  res.status(201).json(asset);
+});
+
+
 module.exports = {
   getAssets,
   createAsset,
@@ -189,4 +215,5 @@ module.exports = {
   comentarAsset,
   getUserAssets,
   searchAssets,
+  rateAsset,
 }

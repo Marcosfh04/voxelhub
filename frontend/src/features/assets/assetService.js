@@ -75,9 +75,30 @@ const updateAsset = async (id, assetData, token) => {
   return response.data;
 };
 
-// Buscar assets por nombre
 const searchAssets = async (query) => {
-  const response = await axios.get(`${API_URL}search?q=${query}`);
+  try {
+    // If the query is empty, return all assets instead of making a search request
+    if (!query || query.trim() === '') {
+      return await getAssets(); // Reuse the getAssets function to fetch all assets
+    }
+    
+    const response = await axios.get(`/api/assets/search?q=${encodeURIComponent(query.trim())}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error searching assets:', error);
+    throw error;
+  }
+};
+
+const rateAsset = async (id, ratingData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const response = await axios.post(`/api/assets/${id}/rate`, ratingData, config);
   return response.data;
 };
 
@@ -91,6 +112,7 @@ const assetService = {
   getUserAssets,
   updateAsset, 
   searchAssets,
+  rateAsset,
 
 }
 

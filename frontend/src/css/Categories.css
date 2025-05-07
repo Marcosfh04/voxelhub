@@ -1,6 +1,5 @@
 .categories-container {
     padding: 20px;
-    max-width: 1200px;
     margin: 0 auto;
   }
   
@@ -20,13 +19,13 @@
     text-align: center;
   }
   
-  .search-bar {
+  .search-bar2 {
     display: flex;
     margin-bottom: 20px;
     justify-content: center;
   }
   
-  .search-bar input {
+  .search-bar2 input {
     padding: 10px;
     font-size: 1rem;
     border: 1px solid #ccc;
@@ -35,7 +34,7 @@
     max-width: 500px;
   }
   
-  .search-bar button {
+  .search-bar2 button {
     padding: 10px 15px;
     font-size: 1rem;
     border: 1px solid #ccc;
@@ -47,7 +46,7 @@
     transition: background-color 0.2s ease;
   }
   
-  .search-bar button:hover {
+  .search-bar2 button:hover {
     background-color: #e69500;
   }
   
@@ -125,6 +124,7 @@
   }
   
   .filter-widget {
+    margin-top: 40px;
     width: 250px;
     padding: 20px;
     background-color: #f5f5f5;

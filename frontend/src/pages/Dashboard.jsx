@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAssets, reset } from '../features/assets/assetSlice'
 import AssetItem from '../components/AssetItem'
@@ -10,6 +10,12 @@ function Dashboard() {
   const { assets, isLoading, isError, message } = useSelector((state) => state.assets)
 
   const categorias = ['3D', '2D', 'audio', 'video', 'code', 'other']
+  const [visibleCategories, setVisibleCategories] = useState(
+    categorias.reduce((acc, categoria) => {
+      acc[categoria] = true // Todas las categorías visibles por defecto
+      return acc
+    }, {})
+  )
 
   useEffect(() => {
     if (isError) console.error(message)
@@ -19,6 +25,13 @@ function Dashboard() {
 
   if (isLoading) return <Spinner />
 
+  const toggleCategoryVisibility = (categoria) => {
+    setVisibleCategories((prev) => ({
+      ...prev,
+      [categoria]: !prev[categoria], // Alternar visibilidad
+    }))
+  }
+
   return (
     <section className='dashboard'>
       {categorias.map((categoria) => {
@@ -27,12 +40,19 @@ function Dashboard() {
 
         return (
           <div key={categoria} className='categoria-bloque'>
-            <h2 className='categoria-titulo'>{categoria.toUpperCase()} →</h2>
-            <div className='categoria-scroll'>
-              {assetsFiltrados.map((asset) => (
-                <AssetItem key={asset._id} asset={asset} />
-              ))}
-            </div>
+            <button
+              className='categoria-titulo'
+              onClick={() => toggleCategoryVisibility(categoria)}
+            >
+              {categoria.toUpperCase()} {visibleCategories[categoria] ? '↓' : '→'}
+            </button>
+            {visibleCategories[categoria] && (
+              <div className='categoria-scroll'>
+                {assetsFiltrados.map((asset) => (
+                  <AssetItem key={asset._id} asset={asset} />
+                ))}
+              </div>
+            )}
           </div>
         )
       })}
