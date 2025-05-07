@@ -80,13 +80,13 @@ function Perfil() {
         ) : (
           <div className="portfolio-grid">
             {assets
-              .slice(0, mostrarTodos ? assets.length : 6) // Mostrar 6 assets por defecto
+              .slice(0, mostrarTodos ? assets.length : 9) 
               .map((asset, index) => (
                 <AssetItem key={index} asset={asset} isProfile={true} /> // Pasa `isProfile` como true
               ))}
           </div>
         )}
-        {assets.length > 6 && (
+        {assets.length > 9 && (
           <button
             className="btn ver-mas"
             onClick={() => setMostrarTodos(!mostrarTodos)}
