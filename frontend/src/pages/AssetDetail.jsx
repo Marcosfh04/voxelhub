@@ -8,6 +8,8 @@ import AudioPlayer from '../components/AudioPlayer'; // Importar el nuevo compon
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../css/AssetDetail.css';
+import VideoPlayer from '../components/VideoPlayer'; // Importar el nuevo componente
+
 
 function AssetDetail() {
   const { id } = useParams();
@@ -38,7 +40,7 @@ function AssetDetail() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!nuevoComentario.trim()) return;
-  
+
     try {
       setEnviando(true);
       const token = user.token;
@@ -124,6 +126,11 @@ function AssetDetail() {
         {asset.type === 'audio' && asset.assetUrl && (
           <div className="audio-player-wrapper">
             <AudioPlayer driveUrl={asset.assetUrl} />
+          </div>
+        )}
+        {asset.type === 'video' && asset.assetUrl && (
+          <div className="video-player-wrapper">
+            <VideoPlayer driveUrl={asset.assetUrl} />
           </div>
         )}
 
