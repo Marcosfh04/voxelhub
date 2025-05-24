@@ -1,0 +1,47 @@
+/* TEMA OSCURO (DEFAULT) */
+.theme-dark {
+  --bg-primary: #000;
+  --bg-secondary: #111;
+  --bg-card: #1a1a1a;
+  --text-primary: #fff;
+  --text-secondary: #ccc;
+  --accent: #ffa500;
+  --accent-hover: #ff8c00;
+  --border-color: #333;
+}
+
+/* TEMA CLARO */
+.theme-light {
+  --bg-primary: #f8f8f8;
+  --bg-secondary: #fff;
+  --bg-card: #fff;
+  --text-primary: #222;
+  --text-secondary: #555;
+  --accent: #ff7700;
+  --accent-hover: #ff6000;
+  --border-color: #ddd;
+}
+
+/* TEMA PROTANOPIA (Daltonismo rojo-verde) */
+.theme-protanopia {
+  --bg-primary: #000;
+  --bg-secondary: #111;
+  --bg-card: #1a1a1a;
+  --text-primary: #fff;
+  --text-secondary: #ccc;
+  --accent: #00aaff; /* Azul en lugar de naranja */
+  --accent-hover: #0088cc;
+  --border-color: #333;
+}
+
+/* TEMA TRITANOPIA (Daltonismo azul-amarillo) */
+.theme-tritanopia {
+  --bg-primary: #000;
+  --bg-secondary: #111;
+  --bg-card: #1a1a1a;
+  --text-primary: #fff;
+  --text-secondary: #ccc;
+  --accent: #bb44ff; /* Morado en lugar de naranja */
+  --accent-hover: #aa33ee;
+  --border-color: #333;
+}

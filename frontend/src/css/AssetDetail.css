@@ -8,7 +8,7 @@
 .asset-detail-card {
   display: flex;
   flex-direction: row;
-  background-color: #000;
+  background-color: var(--bg-secondary);
   padding: 2rem;
   width: 100%;
   max-width: 100%;
@@ -37,15 +37,17 @@
 .icon-button {
   background: none;
   border: none;
-  color: white;
-  font-size: 1.4rem;
+  color: var(--accent); /* Color naranja por defecto */
+  font-size: 1.8rem; /* Aumentado de 1.4rem a 1.8rem */
   cursor: pointer;
   transition: transform 0.2s ease, color 0.2s ease;
+  padding: 10px; /* Añadir padding para hacer el área clickeable más grande */
 }
+
 
 .icon-button:hover {
   transform: scale(1.2);
-  color: #ffa600;
+  color: var(--text-primary); /* Cambia a color primario al pasar el ratón */
 }
 
 .asset-info-section {
@@ -62,20 +64,20 @@
   text-align: center;
   margin-bottom: 1rem;
   font-size: 1.6rem;
-  color: white;
+  color: var(--text-primary);
 }
 
 /* Mejora visual del texto de campos y contenido */
 .asset-info-section p strong {
   font-size: 1.1rem;
-  color: white;
+  color: var(--text-primary);
 }
 
 .asset-info-section p {
   font-size: 1rem;
   margin-bottom: 0.5rem;
   line-height: 1.4;
-  color: #ccc;
+  color: var(--text-secondary);
 }
 
 .asset-rating {
@@ -89,11 +91,11 @@
 }
 
 .comentario {
-  background-color: #222;
+  background-color: var(--bg-card);
   padding: 0.8rem;
   border-radius: 8px;
   margin-bottom: 1rem;
-  color: white;
+  color: var(--text-primary);
 }
 
 .form-comentario textarea {
@@ -102,24 +104,24 @@
   border-radius: 6px;
   margin-top: 0.5rem;
   resize: vertical;
-  background-color: #181818;
-  color: white;
-  border: 1px solid #444;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
 }
 
 .form-comentario button {
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
-  background-color: #ffa600;
+  background-color: var(--accent);
   border: none;
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
-  color: black;
+  color: var(--text-primary);
 }
 
 .form-comentario button:hover {
-  background-color: #ff8c00;
+  background-color: var(--accent-hover);
 }
 
 .btn-ver-mas {
@@ -127,9 +129,9 @@
   margin: 0.5rem auto 1rem auto;
   padding: 0.4rem 1rem;
   background-color: transparent;
-  color: #ffa600;
+  color: var(--accent);
   font-weight: bold;
-  border: 1px solid #ffa600;
+  border: 1px solid var(--accent);
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -137,8 +139,8 @@
 }
 
 .btn-ver-mas:hover {
-  background-color: #ffa600;
-  color: black;
+  background-color: var(--accent);
+  color: var(--text-primary);
 }
 
 /* Estilo general del carrusel */
@@ -155,7 +157,7 @@
   object-fit: contain; /* Ajustar la imagen dentro del contenedor */
   border-radius: 8px; /* Bordes redondeados */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para las imágenes */
-  background-color: #000; /* Fondo negro para imágenes con transparencia */
+  background-color: var(--bg-primary); /* Fondo para imágenes con transparencia */
 }
 
 /* Botones de navegación del carrusel */
@@ -179,7 +181,7 @@
 .slick-prev:before,
 .slick-next:before {
   font-size: 20px;
-  color: white;
+  color: var(--text-primary);
 }
 
 /* Puntos de navegación del carrusel */
@@ -189,11 +191,11 @@
 
 .slick-dots li button:before {
   font-size: 12px;
-  color: gray;
+  color: var(--text-secondary);
 }
 
 .slick-dots li.slick-active button:before {
-  color: white; /* Color de los puntos activos */
+  color: var(--text-primary); /* Color de los puntos activos */
 }
 
 /* Estilo para la imagen de vista previa si no hay carrusel */
@@ -203,7 +205,7 @@
   object-fit: contain; /* Ajustar la imagen dentro del contenedor */
   border-radius: 8px; /* Bordes redondeados */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para las imágenes */
-  background-color: #000; /* Fondo negro para imágenes con transparencia */
+  background-color: var(--bg-primary); /* Fondo para imágenes con transparencia */
 }
 
 .comentario-header {
@@ -220,7 +222,7 @@
 }
 
 .copied-message {
-  color: #ffa500; /* Naranja */
+  color: var(--accent);
   font-size: 14px;
   margin-top: 10px;
   text-align: center;
@@ -235,19 +237,19 @@
 
 .stars .fa-star {
   font-size: 1.5rem;
-  color: #ccc;
+  color: var(--text-secondary);
   transition: color 0.2s ease;
 }
 
 .stars .fa-star.filled {
-  color: #ffa600;
+  color: var(--accent);
 }
 
 .stars .fa-star.half-filled {
   position: relative;
   display: inline-block;
   font-size: 1.5rem;
-  color: #ccc; /* base: estrella vacÃ­a */
+  color: var(--text-secondary); /* base: estrella vacÃ­a */
   width: 1em;
   height: 1.5em;
   overflow: hidden;
@@ -257,7 +259,7 @@
   content: '\f005'; /* fa-star */
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
-  color: #ffa600; /* color de la mitad rellena */
+  color: var(--accent); /* color de la mitad rellena */
   position: absolute;
   left: 0;
   top: 0;
@@ -268,8 +270,8 @@
 }
 
 .rating-section button {
-  background-color: #ffa600;
-  color: white;
+  background-color: var(--accent);
+  color: var(--text-primary);
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
@@ -278,7 +280,7 @@
 }
 
 .rating-section button:hover {
-  background-color: #ff8c00;
+  background-color: var(--accent-hover);
 }
 
 @keyframes fadeInOut {
@@ -328,7 +330,7 @@
   }
   
   .icon-button {
-    font-size: 1.2rem; /* Botones de iconos más pequeños */
+    font-size: 1.6rem; /* Ligeramente más pequeños en móviles, pero aún grandes */
   }
   
   .asset-actions {

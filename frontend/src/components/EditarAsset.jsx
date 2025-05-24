@@ -71,7 +71,8 @@ function EditarAsset() {
       if (campo === 'assetUrl') setSubiendoAsset(true);
       if (campo === 'images') setSubiendoCarrusel(true);
 
-      const res = await axios.post('/api/drive/upload', formData);
+      const res = await axios.post('https://backend-42r2.onrender.com/api/drive/upload', formData);
+
 
       if (campo === 'images') {
         setCarouselImages((prev) => [...prev, res.data.url]);

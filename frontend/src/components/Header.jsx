@@ -5,6 +5,7 @@ import { logout, reset } from '../features/auth/authSlice';
 import '../css/Header.css';
 import { useState, useEffect, useRef } from 'react';
 
+
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -61,6 +62,9 @@ function Header() {
     }
     setMenuOpen(false);
   };
+
+
+
 
   const handleProfileClick = () => {
     navigate('/perfil');
@@ -161,6 +165,7 @@ function Header() {
           )}
         </ul>
       </div>
+      
     </header>
   );
 }

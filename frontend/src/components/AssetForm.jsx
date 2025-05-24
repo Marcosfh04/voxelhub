@@ -4,6 +4,7 @@ import { createAsset } from '../features/assets/assetSlice';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import '../css/AssetForm.css';
+import { useNavigate } from 'react-router-dom';
 
 function AssetForm() {
   const [form, setForm] = useState({
@@ -20,6 +21,7 @@ function AssetForm() {
   const [subiendoCarrusel, setSubiendoCarrusel] = useState(false); // Estado para el carrusel
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -44,7 +46,7 @@ function AssetForm() {
       if (campo === 'previewImage') setSubiendoImagen(true);
       if (campo === 'images') setSubiendoCarrusel(true);
 
-      const res = await axios.post('/api/drive/upload', formData);
+      const res = await axios.post('https://backend-42r2.onrender.com/api/drive/upload', formData);
 
       if (campo === 'images') {
         // Agregar la URL al array de imágenes
@@ -96,6 +98,7 @@ function AssetForm() {
           assetUrl: '',
           images: [],
         });
+        navigate('/perfil');
       })
       .catch(() => toast.error('Error al guardar el asset'));
   };

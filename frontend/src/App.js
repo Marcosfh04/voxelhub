@@ -15,6 +15,9 @@ import EditarAsset from './components/EditarAsset'
 import SearchResults from './pages/SearchResults';
 import VideoPlayer from './components/VideoPlayer'
 import Categories from './components/Categories'
+import ThemeSelector from './components/ThemeSelector' 
+
+
 
 function AppWrapper() {
   const location = useLocation()
@@ -37,6 +40,7 @@ function AppWrapper() {
         <Route path="/video-player" element={<VideoPlayer driveUrl="https://drive.google.com/file/d/1a2b3c4d5e6f7g8h9i0j/view?usp=sharing" />} /> {/* Cambia la URL por la que necesites */}
         <Route path="/categories" element={<Categories />} /> {/* Cambia la URL por la que necesites */}
       </Routes>
+      <ThemeSelector />
     </div>
   )
 }

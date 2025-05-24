@@ -61,12 +61,13 @@ const CustomAudioPlayer = ({ driveUrl }) => {
                 
                 // Verificar si el archivo es accesible a través del proxy
                 try {
-                    const checkResponse = await axios.get(`/api/proxy/check/${fileId}`);
+                    const checkResponse = await axios.get(`https://backend-42r2.onrender.com/api/proxy/check/${fileId}`);
+
                     
                     if (checkResponse.data.success) {
                         setAudioInfo({
                             fileId,
-                            proxyUrl: checkResponse.data.streamUrl,
+                            proxyUrl: `https://backend-42r2.onrender.com${checkResponse.data.streamUrl}`,
                             directUrl: `https://docs.google.com/uc?export=open&id=${fileId}`,
                             downloadUrl: `https://drive.google.com/uc?export=download&id=${fileId}`
                         });

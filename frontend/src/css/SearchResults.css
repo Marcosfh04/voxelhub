@@ -7,7 +7,7 @@
 .search-results-container h1 {
   font-size: 1.8rem;
   margin-bottom: 20px;
-  color: #ffb300;
+  color: var(--accent);
   text-align: center; /* Centrar el título */
 }
 
@@ -27,7 +27,7 @@
 
 p {
   font-size: 1rem;
-  color: #666;
+  color: var(--text-secondary);
   text-align: center;
 }
 
@@ -41,14 +41,16 @@ p {
 
 .sort-dropdown label {
   font-size: 1rem;
-  color: orange;
+  color: var(--accent);
 }
 
 .sort-dropdown select {
   padding: 5px 10px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 .pagination {
@@ -62,26 +64,26 @@ p {
 .pagination button {
   padding: 5px 10px;
   font-size: 1.2rem; /* Aumenta el tamaño de las flechas */
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
-  background-color: black;
+  background-color: var(--bg-primary);
   cursor: pointer;
   transition: background-color 0.2s ease;
-  color: white;
+  color: var(--text-primary);
 }
 
 .pagination button:hover {
-  background-color: #bbbbbb;
+  background-color: var(--bg-secondary);
 }
 
 .pagination button:disabled {
-  background-color: #444444;
+  background-color: var(--bg-card);
   cursor: not-allowed;
 }
 
 .pagination span {
   font-size: 1rem;
-  color: white;
+  color: var(--text-primary);
 }
 
 /* Media queries para pantallas más pequeñas */

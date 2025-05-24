@@ -54,7 +54,8 @@ function Register() {
 
     try {
       setSubiendoImagen(true);
-      const res = await axios.post('/api/drive/upload', formData);
+      const res = await axios.post('https://backend-42r2.onrender.com/api/drive/upload', formData)
+
       setFormData((prevState) => ({
         ...prevState,
         profileImage: res.data.url,

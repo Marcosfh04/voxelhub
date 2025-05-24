@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import './css/themes.css';
 
 * {
   margin: 0;
@@ -10,15 +11,18 @@ body {
   margin-top: 100px;
   font-family: 'Poppins', sans-serif;
   height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 a {
   text-decoration: none;
-  color: #000;
+  color: var(--text-primary);
 }
 
 p {
   line-height: 1.7;
+  color: var(--text-secondary);
 }
 
 ul {
@@ -34,6 +38,7 @@ h2,
 h3 {
   font-weight: 600;
   margin-bottom: 10px;
+  color: var(--text-primary);
 }
 
 .container {
@@ -44,24 +49,24 @@ h3 {
   text-align: center;
 }
 
-/* Elimina o ajusta cualquier estilo previo de la clase .header */
+/* Estilos del header */
 .header {
   width: 100%;
-  background-color: #ffa500; /* Naranja */
+  background-color: var(--accent);
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #fff;
+  color: var(--text-primary);
   font-weight: bold;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-bottom: none; /* Elimina el borde si lo tienes */
-  margin: 0; /* Asegúrate de que el margen sea 0 */
-  position: fixed; /* Esto hace que el header se quede en la parte superior */
-  top: 0; /* Fija el header en la parte superior de la página */
+  border-bottom: none;
+  margin: 0;
+  position: fixed;
+  top: 0;
   left: 0;
   right: 0;
-  z-index: 1000; /* Asegura que el header quede encima de otros elementos */
+  z-index: 1000;
 }
 
 .header ul {
@@ -79,16 +84,17 @@ h3 {
 .header ul li a {
   display: flex;
   align-items: center;
+  color: var(--text-primary);
 }
 
 .header ul li a:hover {
-  color: #777;
+  color: var(--text-secondary);
 }
 
 .header .btn {
   width: 100%;
-  background-color: #ffa500;
-  color: #fff;
+  background-color: var(--accent);
+  color: var(--text-primary);
   padding: 12px;
   font-size: 16px;
   border: none;
@@ -98,9 +104,8 @@ h3 {
 }
 
 .header .btn:hover {
-  background-color: #e69500;
+  background-color: var(--accent-hover);
 }
-
 
 .goals {
   display: grid;
@@ -109,10 +114,11 @@ h3 {
 }
 
 .goal {
-  background-color: #f4f4f4;
+  background-color: var(--bg-card);
   margin: 10px 0;
   padding: 20px 0 10px;
   position: relative;
+  color: var(--text-primary);
 }
 
 .goal .close {
@@ -122,6 +128,7 @@ h3 {
   cursor: pointer;
   border: none;
   background: none;
+  color: var(--text-primary);
 }
 
 .form,
@@ -139,24 +146,27 @@ h3 {
 .form-group select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #e6e6e6;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   margin-bottom: 10px;
   font-family: inherit;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 .form-group label {
   text-align: left;
   display: block;
   margin: 0 0 5px 3px;
+  color: var(--text-primary);
 }
 
 .btn {
   padding: 10px 20px;
-  border: 1px solid #000;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
-  background: #ffffff;
-  color: #fff;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
@@ -172,8 +182,8 @@ h3 {
 }
 
 .btn-reverse {
-  background: #fff;
-  color: #000;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 .btn-block {
@@ -202,7 +212,7 @@ h3 {
   width: 64px;
   height: 64px;
   border: 8px solid;
-  border-color: #000 transparent #555 transparent;
+  border-color: var(--accent) transparent var(--text-secondary) transparent;
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }
@@ -212,8 +222,6 @@ h3 {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
 }
-
-
 
 .asset-card:hover {
   transform: scale(1.02);
@@ -227,10 +235,9 @@ h3 {
   text-align: left;
 }
 
-
-
 .asset-info h3 {
   margin: 0.5rem 0 0.2rem;
+  color: var(--text-primary);
 }
 
 .filters {
@@ -243,11 +250,9 @@ h3 {
 }
 
 .btn-activo {
-  background-color: orange;
-  color: black;
+  background-color: var(--accent);
+  color: var(--text-primary);
 }
-
-
 
 @keyframes spin {
   0% {
@@ -271,4 +276,3 @@ h3 {
     font-size: 1.5rem;
   }
 }
-

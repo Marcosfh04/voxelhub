@@ -1,78 +1,79 @@
 /* Login.css */
 
 body {
-    background-color: #000;
-    color: #fff;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .heading {
-    text-align: center;
-    margin-top: 40px;
-  }
-  
-  .heading h1 {
-    font-size: 28px;
-    margin-bottom: 10px;
-  }
-  
-  .heading p {
-    font-size: 16px;
-    color: #ccc;
-  }
-  
-  .form {
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #000;
-    border-radius: 12px;
-    box-shadow: 0 0 10px #ffa500;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 12px;
-    border-radius: 6px;
-    border: none;
-    font-size: 16px;
-    box-sizing: border-box;
-    background-color: #fff;
-    color: #000;
-  }
-  
-  .form-control::placeholder {
-    color: #999;
-  }
-  
-  .btn-btn-block {
-    width: 100%;
-    background-color: #ffa500;
-    color: #fff;
-    padding: 12px;
-    font-size: 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-btn-block:hover {
-    background-color: #e69500;
-  }
-  
-  .register-link {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-  }
-  
-  .register-link a {
-    color: #fff;
-    text-decoration: underline;
-  }
-  
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Poppins', sans-serif;
+}
+
+.heading {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.heading h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.heading p {
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.form {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #000;
+}
+
+.form-control::placeholder {
+  color: #999;
+}
+
+.btn-btn-block {
+  width: 100%;
+  background-color: var(--accent);
+  color: var(--text-primary);
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-btn-block:hover {
+  background-color: var(--accent-hover);
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.register-link a {
+  color: var(--text-primary);
+  text-decoration: underline;
+}

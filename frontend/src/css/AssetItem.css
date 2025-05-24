@@ -1,7 +1,7 @@
 .asset-card {
-  background-color: #111;
-  color: white;
-  border: 1px solid #333;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 10px;
   max-width: 250px;
@@ -12,7 +12,7 @@
 
 .asset-card:hover {
   transform: scale(1.03);
-  box-shadow: 0 4px 8px orange;
+  box-shadow: 0 4px 8px var(--accent);
 }
 
 .asset-image {
@@ -29,7 +29,7 @@
 }
 
 .asset-info p{
-  color: orange;
+  color: var(--accent);
 }
 
 .action-buttons {
@@ -40,8 +40,8 @@
 }
 
 .edit-button {
-  background-color: orange;
-  color: white;
+  background-color: var(--accent);
+  color: var(--text-primary);
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
@@ -50,7 +50,7 @@
 }
 
 .edit-button:hover {
-  background-color: #ff9800;
+  background-color: var(--accent-hover);
 }
 
 .delete-button {
@@ -66,4 +66,3 @@
 .delete-button:hover {
   background-color: #d32f2f;
 }
-

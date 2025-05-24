@@ -20,7 +20,8 @@ const VideoPlayer = ({ driveUrl }) => {
     };
 
     const fileId = extractGoogleDriveId(driveUrl);
-    const proxyUrl = fileId ? `/api/proxy/stream-video/${fileId}` : null;
+    const proxyUrl = fileId ? `https://backend-42r2.onrender.com/api/proxy/stream-video/${fileId}` : null;
+
 
     if (!proxyUrl) {
         return <p>Error: No se pudo procesar la URL del video.</p>;

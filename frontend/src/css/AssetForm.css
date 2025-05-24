@@ -1,136 +1,134 @@
 .asset-form-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    background-color: #000;
-    color: white;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
-  }
-  
-  .asset-form-container h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .asset-form-container form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .asset-form-container label {
-    font-weight: bold;
-    margin-bottom: 0.3rem;
-  }
-  
-  .asset-form-container input[type='text'],
-  .asset-form-container textarea,
-  .asset-form-container select {
-    padding: 0.7rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background-color: #111;
-    color: white;
-    font-size: 1rem;
-    width: 100%;
-  }
-  
-  .asset-form-container textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-  
-  .asset-form-container input[type='file'] {
-    display: block;
-    padding: 0.4rem;
-    background-color: #111;
-    color: white;
-    border-radius: 8px;
-    border: 1px solid #444;
-    font-size: 1rem;
-    margin-top: 0.3rem;
-  }
-  
-  
-  .asset-upload-box {
-    background-color: #222;
-    border: 2px dashed #ffa600;
-    padding: 1.5rem;
-    border-radius: 12px;
-    text-align: center;
-    cursor: pointer;
-    position: relative;
-    color: #aaa;
-    font-size: 1rem;
-  }
-  
-  .asset-upload-box:hover {
-    background-color: #333;
-  }
-  
-  .asset-upload-box img {
-    max-width: 100%;
-    margin-top: 1rem;
-    border-radius: 8px;
-  }
-  
-  .asset-form-container button[type='submit'] {
-    background-color: #ffa600;
-    color: black;
-    font-weight: bold;
-    padding: 0.9rem 1.5rem;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 100%; /* ancho completo */
-    margin-top: 1.5rem;
-  }
-  
-  .asset-form-container button[type='submit']:hover {
-    background-color: #ff8c00;
-    transform: translateY(-2px);
-  }
-  
+  max-width: 800px;
+  margin: 2rem auto;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+}
 
-  .asset-upload-box {
-    background-color: #e0e0e0;
-    border: 2px dashed #ffa600;
-    padding: 2rem;
-    border-radius: 16px;
-    text-align: center;
-    cursor: pointer;
-    position: relative;
-    color: #555;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-  }
-  
-  .asset-upload-box:hover {
-    background-color: #f5f5f5;
-  }
-  
-  .asset-upload-box i {
-    color: #ffa600;
-    margin-bottom: 1rem;
-  }
-  
-  .asset-upload-box img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-    margin-bottom: 0.5rem;
-  }
-  .asset-form-container label {
-    font-weight: bold;
-    margin-bottom: 0.3rem;
-    text-align: left;  /* <-- asegúrate de que esté */
-    display: block;    /* <-- necesario para que respete el alineado */
-  }
-    
+.asset-form-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+}
+
+.asset-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.asset-form-container label {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  text-align: left;
+  display: block;
+  color: var(--text-primary);
+}
+
+.asset-form-container input[type='text'],
+.asset-form-container textarea,
+.asset-form-container select {
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  width: 100%;
+}
+
+.asset-form-container textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.asset-form-container input[type='file'] {
+  display: block;
+  padding: 0.4rem;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
+  margin-top: 0.3rem;
+}
+
+/* Primera definición de asset-upload-box (para modo oscuro) */
+.asset-form-container .asset-upload-box {
+  background-color: var(--bg-card);
+  border: 2px dashed var(--accent);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.asset-form-container .asset-upload-box:hover {
+  background-color: var(--bg-secondary);
+}
+
+.asset-upload-box img {
+  max-width: 100%;
+  margin-top: 1rem;
+  border-radius: 8px;
+}
+
+.asset-form-container button[type='submit'] {
+  background-color: var(--accent);
+  color: var(--text-primary);
+  font-weight: bold;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%; /* ancho completo */
+  margin-top: 1.5rem;
+}
+
+.asset-form-container button[type='submit']:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+/* Segunda definición de asset-upload-box (hay una duplicación en tu CSS original) */
+/* Nota: has simplificado esta segunda definición para unificar el estilo */
+.asset-upload-box {
+  background-color: var(--bg-card);
+  border: 2px dashed var(--accent);
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.asset-upload-box:hover {
+  background-color: var(--bg-secondary);
+}
+
+.asset-upload-box i {
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.asset-upload-box img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+}
