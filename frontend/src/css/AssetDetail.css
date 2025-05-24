@@ -156,8 +156,7 @@
   height: 400px; /* Altura fija para el contenedor */
   object-fit: contain; /* Ajustar la imagen dentro del contenedor */
   border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para las imágenes */
-  background-color: var(--bg-primary); /* Fondo para imágenes con transparencia */
+ 
 }
 
 /* Botones de navegación del carrusel */
